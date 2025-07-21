@@ -31,23 +31,32 @@ export default function ScheduleCalendar() {
   };
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow mb-6">
-      <div className="font-semibold mb-2">Schedule Calendar</div>
+    <div className="bg-gradient-to-br from-indigo-50 via-blue-50 to-white rounded-xl shadow-lg p-4">
+      <div className="font-bold mb-3 text-indigo-700 text-lg flex items-center gap-2">
+        <span className="w-3 h-3 rounded-full bg-indigo-400 animate-pulse"></span>
+        Schedule Calendar
+      </div>
       <Calendar
         onChange={handleChange}
         value={value}
-        className="border-0"
+        className="border-0 !bg-transparent !shadow-none"
         tileClassName={({ date, view }) => {
           const isToday = date.toDateString() === new Date().toDateString();
+          const scheduled = isScheduled(date);
+          let classes = "transition duration-150";
           if (isToday) {
-            return "bg-indigo-100 text-indigo-700 font-bold";
+            classes += " bg-indigo-200 text-indigo-800 font-bold border-2 border-indigo-400";
           }
-          return undefined;
+          if (scheduled) {
+            classes += " ring-2 ring-indigo-400 bg-indigo-50 text-indigo-700 font-semibold";
+          }
+          classes += " hover:bg-indigo-100 hover:text-indigo-900 cursor-pointer rounded-lg";
+          return classes;
         }}
         tileContent={({ date, view }) =>
           view === "month" && isScheduled(date) ? (
             <div className="flex justify-center items-center">
-              <span className="w-2 h-2 bg-indigo-500 rounded-full mt-1"></span>
+              <span className="w-2 h-2 bg-indigo-500 rounded-full mt-1 animate-bounce"></span>
             </div>
           ) : null
         }
@@ -56,8 +65,8 @@ export default function ScheduleCalendar() {
         prev2Label={null}
         next2Label={null}
       />
-      <div className="mt-4 text-xs text-gray-500">
-        <span className="inline-block w-2 h-2 bg-indigo-500 rounded-full mr-2"></span>
+      <div className="mt-4 text-xs text-indigo-600 flex items-center gap-2">
+        <span className="inline-block w-2 h-2 bg-indigo-500 rounded-full animate-bounce"></span>
         Scheduled Post
       </div>
     </div>
