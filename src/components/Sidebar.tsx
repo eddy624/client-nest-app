@@ -1,40 +1,20 @@
 
 import { useState } from "react";
-import {
-  FaLinkedin,
-  FaFacebook,
-  FaYoutube,
-  FaTiktok,
-  FaPinterest,
-  FaInstagram,
-  FaTelegram,
-  FaTwitter,
-} from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+import ConnectSocialModal from "./ConnectSocialModal";
 
 const menuItems = [
-  { label: "Dashboard", icon: "🏠", active: true },
-  { label: "Accounts", icon: "👤" },
-  { label: "Analytics", icon: "📊" },
-  { label: "Schedule Calendar", icon: "🗓️" },
+  { label: "Dashboard", icon: "🏠", path: "/" },
+  { label: "Socials", icon: "👤" },
+  { label: "Analytics", icon: "📊", path: "/analytics" },
+  { label: "Schedule Calendar", icon: "🗓️", path: "/schedule" },
   { label: "Reports", icon: "📄" },
   { label: "Team Collaboration", icon: "👥" },
   { label: "Settings", icon: "⚙️" },
 ];
 
-const socialAccounts = [
-  { name: "LinkedIn", icon: <FaLinkedin className="text-blue-700" /> },
-  { name: "Facebook", icon: <FaFacebook className="text-blue-600" /> },
-  { name: "X (Twitter)", icon: <FaTwitter className="text-black" /> }, // Use FaTwitter here
-  { name: "YouTube", icon: <FaYoutube className="text-red-600" /> },
-  { name: "TikTok", icon: <FaTiktok className="text-black" /> },
-  { name: "Pinterest", icon: <FaPinterest className="text-red-500" /> },
-  { name: "Instagram", icon: <FaInstagram className="text-pink-500" /> },
-  { name: "Telegram", icon: <FaTelegram className="text-blue-400" /> },
-  // { name: "Google Business", icon: <SiGooglemybusiness className="text-blue-500" /> },
-];
-
 export default function Sidebar() {
-  const [accountsOpen, setAccountsOpen] = useState(false);
+  const [showConnectModal, setShowConnectModal] = useState(false);
   return (
     <aside className="hidden lg:flex fixed top-0 left-0 h-screen w-64 bg-[#f4f6fa] p-6 flex-col z-20 overflow-y-auto max-h-screen">
       {/* Logo */}
@@ -53,50 +33,42 @@ export default function Sidebar() {
       {/* Menu */}
       <nav className="flex flex-col gap-2 flex-1">
         {menuItems.map((item) => {
-          if (item.label === "Accounts") {
+          if (item.label === "Socials") {
             return (
-              <div key={item.label} className="relative">
-                <a
-                  className={`flex items-center gap-3 px-3 py-2 rounded-lg font-medium text-sm cursor-pointer transition ${
-                    item.active
-                      ? "bg-indigo-100 text-indigo-700"
-                      : "text-gray-700 hover:bg-indigo-50"
-                  }`}
-                  onClick={() => setAccountsOpen((open) => !open)}
-                >
-                  <span>{item.icon}</span>
-                  {item.label}
-                  <span className="ml-auto">▾</span>
-                </a>
-                {accountsOpen && (
-                  <div className="absolute left-0 mt-2 w-56 bg-white rounded-lg shadow-lg z-10 border border-gray-100">
-                    {socialAccounts.map((acc) => (
-                      <div
-                        key={acc.name}
-                        className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-50 cursor-pointer text-gray-700 text-sm"
-                      >
-                        <span>{acc.icon}</span>
-                        <span>{acc.name}</span>
-                        <button className="ml-auto text-indigo-600 hover:underline text-xs">Connect</button>
-                      </div>
-                    ))}
-                  </div>
-                )}
+              <div
+                key={item.label}
+                className="flex items-center gap-3 px-3 py-2 rounded-lg font-medium text-sm cursor-pointer text-gray-700 hover:bg-indigo-50 transition"
+                onClick={() => setShowConnectModal(true)}
+              >
+                <span>{item.icon}</span>
+                {item.label}
               </div>
             );
           }
+          if (item.path) {
+            return (
+              <NavLink
+                key={item.label}
+                to={item.path}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3 py-2 rounded-lg font-medium text-sm cursor-pointer transition ${
+                    isActive ? "bg-indigo-100 text-indigo-700" : "text-gray-700 hover:bg-indigo-50"
+                  }`
+                }
+              >
+                <span>{item.icon}</span>
+                {item.label}
+              </NavLink>
+            );
+          }
           return (
-            <a
+            <div
               key={item.label}
-              className={`flex items-center gap-3 px-3 py-2 rounded-lg font-medium text-sm cursor-pointer transition ${
-                item.active
-                  ? "bg-indigo-100 text-indigo-700"
-                  : "text-gray-700 hover:bg-indigo-50"
-              }`}
+              className="flex items-center gap-3 px-3 py-2 rounded-lg font-medium text-sm text-gray-700 cursor-pointer hover:bg-indigo-50 transition"
             >
               <span>{item.icon}</span>
               {item.label}
-            </a>
+            </div>
           );
         })}
       </nav>
@@ -110,6 +82,7 @@ export default function Sidebar() {
         <button className="w-full bg-indigo-600 text-white rounded-lg py-1.5 font-semibold mb-2">Upgrade Plan</button>
         <button className="w-full border border-indigo-600 text-indigo-600 rounded-lg py-1.5 font-semibold">View Pricing</button>
       </div>
+      <ConnectSocialModal open={showConnectModal} onClose={() => setShowConnectModal(false)} />
     </aside>
   );
 }

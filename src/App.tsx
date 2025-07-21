@@ -1,32 +1,29 @@
 
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
-import StatsCards from "./components/StatsCards";
-import Header from "./components/Header";
-import PostsReachChart from "./components/PostsReachChart";
-import ScheduleCalendar from "./components/ScheduleCalendar";
-import UpcomingPosts from "./components/UpcomingPosts";
-import ConnectedAccounts from "./components/ConnectedAccounts";
+import AnalyticsPage from "./pages/dashboard/AnalyticsPage";
+import DashboardPage from "./pages/dashboard/DashboardPage";
+import SchedulePage from "./pages/dashboard/SchedulePage";
 import "./index.css";
 
 function App() {
   return (
-    <div className="flex min-h-screen bg-[#f9fafe]">
-      <Sidebar />
-      <main className="flex-1 p-4 sm:p-6 md:p-8 ml-0 lg:ml-64">
-        <Header />
-        <StatsCards />
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
-            <PostsReachChart />
-          </div>
-          <div>
-            <ScheduleCalendar />
-          </div>
-        </div>
-        <UpcomingPosts />
-        <ConnectedAccounts />
-      </main>
-    </div>
+    <BrowserRouter>
+      <div className="flex min-h-screen bg-[#f9fafe]">
+        <Sidebar />
+        <main className="flex-1 p-4 sm:p-6 md:p-8 ml-0 lg:ml-64">
+          <Routes>
+            <Route
+              path="/"
+              element={<DashboardPage />}
+            />
+            <Route path="/analytics" element={<AnalyticsPage />} />
+            <Route path="/schedule" element={<SchedulePage />} />
+            {/* Add more routes as needed */}
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 
