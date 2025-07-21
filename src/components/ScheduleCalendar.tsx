@@ -40,7 +40,7 @@ export default function ScheduleCalendar() {
         onChange={handleChange}
         value={value}
         className="border-0 !bg-transparent !shadow-none"
-        tileClassName={({ date, view }) => {
+        tileClassName={({ date }) => {
           const isToday = date.toDateString() === new Date().toDateString();
           const scheduled = isScheduled(date);
           let classes = "transition duration-150";

@@ -26,13 +26,13 @@ const events = [
 ];
 
 export default function SchedulePage() {
-  const [month, setMonth] = useState("February");
-  const [year, setYear] = useState(2023);
   const [view, setView] = useState("Week");
   const [showModal, setShowModal] = useState(false);
   const [showHashtagModal, setShowHashtagModal] = useState(false);
   const [showAddAccountModal, setShowAddAccountModal] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [month] = useState("February");
+  const [year] = useState(2023);
 
   const handleUploadClick = () => {
     fileInputRef.current?.click();
@@ -115,7 +115,7 @@ export default function SchedulePage() {
         <div className="relative" style={{ minHeight: `${timeSlots.length * 60}px` }}>
           {/* Time slots */}
           <div className="absolute left-0 top-0 w-16 flex flex-col">
-            {timeSlots.map((slot, i) => (
+            {timeSlots.map((slot) => (
               <div key={slot} className="h-16 flex items-start justify-end pr-2 text-xs text-gray-400 border-b">
                 {slot}
               </div>
@@ -142,8 +142,8 @@ export default function SchedulePage() {
                   </div>
                 ))}
                 {/* Render grid lines */}
-                {timeSlots.map((_, i) => (
-                  <div key={i} className="h-16 border-b"></div>
+                {timeSlots.map((_) => (
+                  <div key={_} className="h-16 border-b"></div>
                 ))}
               </div>
             ))}

@@ -1,4 +1,4 @@
-import { FaSearch, FaCog, FaUserCircle, FaHeart, FaChartLine, FaEye, FaCommentDots, FaFacebook, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { FaSearch, FaUserCircle, FaHeart, FaChartLine, FaEye, FaCommentDots, FaFacebook, FaLinkedin, FaInstagram } from "react-icons/fa";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
 const analyticsStats = [
@@ -209,7 +209,7 @@ export default function AnalyticsPage() {
                   paddingAngle={2}
                   dataKey="value"
                 >
-                  {profileVisitsData.map((entry, index) => (
+                  {profileVisitsData.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={profileVisitsColors[index % profileVisitsColors.length]} />
                   ))}
                 </Pie>

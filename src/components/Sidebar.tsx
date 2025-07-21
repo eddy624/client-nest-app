@@ -1,16 +1,6 @@
 
 import { useState } from "react";
-import {
-  FaLinkedin,
-  FaFacebook,
-  FaYoutube,
-  FaTiktok,
-  FaPinterest,
-  FaInstagram,
-  FaTelegram,
-  FaTwitter,
-} from "react-icons/fa";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import ConnectSocialModal from "./ConnectSocialModal";
 
 const menuItems = [
@@ -23,20 +13,7 @@ const menuItems = [
   { label: "Settings", icon: "⚙️" },
 ];
 
-const socialAccounts = [
-  { name: "LinkedIn", icon: <FaLinkedin className="text-blue-700" /> },
-  { name: "Facebook", icon: <FaFacebook className="text-blue-600" /> },
-  { name: "X (Twitter)", icon: <FaTwitter className="text-black" /> }, // Use FaTwitter here
-  { name: "YouTube", icon: <FaYoutube className="text-red-600" /> },
-  { name: "TikTok", icon: <FaTiktok className="text-black" /> },
-  { name: "Pinterest", icon: <FaPinterest className="text-red-500" /> },
-  { name: "Instagram", icon: <FaInstagram className="text-pink-500" /> },
-  { name: "Telegram", icon: <FaTelegram className="text-blue-400" /> },
-  // { name: "Google Business", icon: <SiGooglemybusiness className="text-blue-500" /> },
-];
-
 export default function Sidebar() {
-  const [accountsOpen, setAccountsOpen] = useState(false);
   const [showConnectModal, setShowConnectModal] = useState(false);
   return (
     <aside className="hidden lg:flex fixed top-0 left-0 h-screen w-64 bg-[#f4f6fa] p-6 flex-col z-20 overflow-y-auto max-h-screen">
