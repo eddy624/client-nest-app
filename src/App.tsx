@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import RegisterPage from './pages/auth/RegisterPage';
 import LoginPage from './pages/auth/LoginPage';
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
-import { BrowserRouter, Routes, Route } from "r
 import Sidebar from "./components/Sidebar";
 import AnalyticsPage from "./pages/dashboard/AnalyticsPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
